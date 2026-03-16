@@ -45,7 +45,12 @@ export const TodoItem: React.FC<Props> = ({
       {todo.id === selectedTodo?.id ? (
         <form
           onSubmit={async event => {
-            await onUpdate(todo.id, updatedTodoTitle, setSelectedTodo, event);
+            await onUpdate(
+              todo.id,
+              updatedTodoTitle.trim(),
+              setSelectedTodo,
+              event,
+            );
           }}
         >
           <input
@@ -55,7 +60,7 @@ export const TodoItem: React.FC<Props> = ({
             className="todo__title-field"
             placeholder="Empty todo will be deleted"
             onBlur={async () => {
-              await onUpdate(todo.id, updatedTodoTitle, setSelectedTodo);
+              await onUpdate(todo.id, updatedTodoTitle.trim(), setSelectedTodo);
             }}
             onKeyUp={event => {
               if (event.key === 'Escape') {

@@ -175,6 +175,8 @@ export const App: React.FC = () => {
 
     if (newTitle === '') {
       await handleTodoDelete(todoId);
+
+      return;
     }
 
     if (newTitle === todos.find(todo => todo.id === todoId)?.title) {
@@ -198,7 +200,7 @@ export const App: React.FC = () => {
       await updateTodo(todoId, { title: newTitle.trim() });
       setSelectedTodo(null);
     } catch {
-      setSelectedTodo(todos.find(todo => todo.id) ?? null);
+      setSelectedTodo(todos.find(todo => todo.id === todoId) ?? null);
       setErrorMessage('Unable to update a todo');
       hideErrorMessageAfterTimeout(HIDE_ERROR_TIMEOUT);
     } finally {
